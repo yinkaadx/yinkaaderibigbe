@@ -595,21 +595,16 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   "use strict";
 
   /* Live Mauritius time, with the visitor's own time when it differs */
+  /* Mauritius keeps UTC+4 all year, so plain arithmetic replaces the costly timezone formatter */
   var clock = document.getElementById("clock");
-  var fmtMU = null, fmtHere = null, hereZone = null;
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
   function tick() {
-    if (!fmtMU) {
-      try {
-        fmtMU = new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Indian/Mauritius" });
-        fmtHere = new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", hour12: false });
-        hereZone = fmtHere.resolvedOptions().timeZone;
-      } catch (e) { return; }
-    }
     var now = new Date();
-    var mu = fmtMU.format(now);
+    var muMinutes = (now.getUTCHours() * 60 + now.getUTCMinutes() + 240) % 1440;
+    var mu = pad(Math.floor(muMinutes / 60)) + ":" + pad(muMinutes % 60);
     var text = "It is <strong>" + mu + "</strong> in Mauritius right now";
-    var local = fmtHere.format(now);
-    if (hereZone && hereZone !== "Indian/Mauritius" && local !== mu) {
+    var local = pad(now.getHours()) + ":" + pad(now.getMinutes());
+    if (now.getTimezoneOffset() !== -240 && local !== mu) {
       text += ", " + local + " where you are";
     }
     clock.innerHTML = text + ".";
