@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://yinkaaderibigbe.pages.dev/</loc>
+    <loc>https://yinkaaderibigbe.com/</loc>
     <lastmod>2026-10-21</lastmod>
     <image:image>
-      <image:loc>https://yinkaaderibigbe.pages.dev/assets/yinka-aderibigbe.jpg</image:loc>
+      <image:loc>https://yinkaaderibigbe.com/assets/yinka-aderibigbe.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://yinkaaderibigbe.pages.dev/assets/yinka-aderibigbe-portrait.jpg</image:loc>
+      <image:loc>https://yinkaaderibigbe.com/assets/yinka-aderibigbe-portrait.jpg</image:loc>
     </image:image>
   </url>
 </urlset>
