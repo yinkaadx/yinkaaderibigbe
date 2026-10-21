@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yinkaaderibigbe.pages.dev/sitemap.xml
