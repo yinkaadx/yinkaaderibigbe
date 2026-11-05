@@ -30,6 +30,7 @@
 <link rel="preload" href="/fonts/newsreader-display.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin>
 
+<script>document.documentElement.classList.add("js");</script>
 <style>
 @font-face {
   font-family: "Newsreader";
@@ -49,17 +50,21 @@
 :root {
   --bg: #E8F4FB;
   --panel: #FFFFFF;
-  --backdrop: #C7E8F7;
+  --band: #DDF0F9;
+  --ghost: #D4EBF7;
   --ink: #163A2C;
   --muted: #42604F;
   --line: #9CCBE2;
+  --hairline: #BFDDEC;
   --dawn: #186A42;
+  --dawn-deep: #135A36;
   --dawn-ink: #FFFFFF;
+  --sun: #87CEEB;
   --link: #186A42;
   --focus: #186A42;
   --serif: "Newsreader", "Iowan Old Style", Georgia, serif;
   --sans: "Hanken Grotesk", "Segoe UI", Helvetica, Arial, sans-serif;
-  --measure: 66ch;
+  --measure: 62ch;
   --wrap: 1160px;
   --gutter: clamp(16px, 4vw, 40px);
 }
@@ -91,54 +96,97 @@ a:hover { text-decoration-thickness: 2px; }
 .top nav a:hover { color: var(--link); text-decoration: underline; }
 .top nav a[aria-current="page"] { color: var(--link); font-weight: 650; }
 
-.lead { padding: clamp(28px, 6vw, 64px) 0 10px; }
-.kicker { font-size: 0.85rem; font-weight: 650; letter-spacing: 0.14em; text-transform: uppercase; color: var(--link); margin: 0 0 14px; }
-h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(2.2rem, 5.5vw, 3.6rem); line-height: 1.06; letter-spacing: -0.015em; margin: 0 0 18px; max-width: 20ch; }
-.lead p { max-width: var(--measure); margin: 0 0 14px; }
-.lead .note { color: var(--muted); font-size: 0.98rem; }
+/* Opening */
+.lead { padding: clamp(40px, 9vh, 110px) 0 clamp(26px, 5vh, 54px); }
+.kicker { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--link); margin: 0 0 16px; }
+h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(2.6rem, 8vw, 5.2rem); line-height: 1.02; letter-spacing: -0.02em; margin: 0 0 24px; max-width: 16ch; text-wrap: balance; }
+.lead p { max-width: var(--measure); margin: 0 0 14px; font-size: clamp(1.125rem, 1.6vw, 1.3rem); }
+.lead .note { color: var(--muted); font-size: 1rem; }
 
-.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin: 30px 0 0; padding: 0; list-style: none; }
-.stats li { background: var(--panel); padding: 18px 18px 16px; }
-.stats b { display: block; font-family: var(--serif); font-weight: 500; font-size: 2rem; line-height: 1.1; }
-.stats span { color: var(--muted); font-size: 0.95rem; }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(18px, 3vw, 44px); margin: clamp(30px, 6vh, 60px) 0 0; padding: 0; list-style: none; }
+.stats li { border-top: 2px solid var(--ink); padding-top: 14px; }
+.stats b { display: block; font-family: var(--serif); font-weight: 500; font-size: clamp(2.6rem, 5.5vw, 4.4rem); line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.stats span { color: var(--muted); font-size: 0.98rem; display: block; margin-top: 6px; max-width: 24ch; }
 
-section { padding: clamp(30px, 6vw, 56px) 0 0; }
-h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.7rem, 3.4vw, 2.3rem); line-height: 1.15; margin: 0 0 8px; }
-.sub { color: var(--muted); max-width: var(--measure); margin: 0 0 26px; }
+/* Timeline */
+.timeline { margin: clamp(40px, 7vh, 72px) 0 0; background: var(--panel); border: 1px solid var(--line); padding: clamp(18px, 3vw, 34px) clamp(10px, 2vw, 26px) 10px; }
+.timeline svg { width: 100%; height: auto; display: block; font-family: var(--sans); }
+.timeline figcaption { color: var(--muted); font-size: 0.95rem; padding: 10px clamp(8px, 1.5vw, 10px) 12px; max-width: none; display: flex; flex-wrap: wrap; gap: 6px 26px; }
+.timeline figcaption i { font-style: normal; }
+.timeline .dotline { display: inline-block; width: 14px; height: 0; border-top: 2.6px solid; vertical-align: middle; margin-right: 7px; transform: translateY(-1px); }
+.timeline .ring { display: inline-block; width: 9px; height: 9px; border: 2.4px solid var(--dawn); border-radius: 50%; vertical-align: middle; margin-right: 7px; transform: translateY(-1px); }
 
-.case { background: var(--panel); border: 1px solid var(--line); padding: clamp(20px, 3.5vw, 34px); margin: 0 0 22px; }
-.case .kicker { margin-bottom: 8px; }
-.case h3 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.35rem, 2.6vw, 1.75rem); line-height: 1.2; margin: 0 0 6px; }
-.case .deck { color: var(--muted); max-width: var(--measure); margin: 0 0 16px; }
-.case .figure { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 12px 0; margin: 0 0 18px; }
-.case .figure b { font-family: var(--serif); font-weight: 500; font-size: 1.9rem; margin-right: 10px; }
-.case .figure span { color: var(--muted); }
-.case h4 { font-size: 0.85rem; font-weight: 650; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin: 18px 0 6px; }
-.case p, .case ul { max-width: var(--measure); margin: 0 0 10px; }
-.case ul { padding-left: 1.2em; }
-.case li { margin-bottom: 6px; }
+/* Chapters */
+.cases-head { padding: clamp(54px, 10vh, 100px) 0 0; }
+h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(2rem, 4.6vw, 3.2rem); line-height: 1.08; letter-spacing: -0.015em; margin: 0 0 10px; }
+.sub { color: var(--muted); max-width: var(--measure); margin: 0 0 22px; }
+.case-index { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0 0 8px; }
+.case-index a { display: inline-block; border: 1px solid var(--line); background: var(--panel); color: var(--ink); text-decoration: none; font-size: 0.92rem; font-weight: 600; padding: 6px 14px; border-radius: 999px; }
+.case-index a:hover { border-color: var(--dawn); color: var(--dawn); }
+
+.chapter { position: relative; padding: clamp(48px, 9vh, 96px) 0; overflow: clip; }
+.chapter:nth-of-type(odd) { background: var(--panel); }
+.chapter .mark { position: absolute; top: clamp(4px, 1vh, 14px); right: var(--gutter); font-family: var(--serif); font-weight: 500; font-size: clamp(6rem, 16vw, 13rem); line-height: 1; color: var(--ghost); letter-spacing: -0.04em; user-select: none; pointer-events: none; }
+.chapter:nth-of-type(even) .mark { color: #F3FAFE; opacity: 0.9; }
+.chapter:nth-of-type(odd) .mark { color: var(--bg); }
+.chapter .grid { position: relative; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(26px, 5vw, 70px); align-items: start; }
+.chapter h3 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.8rem, 3.6vw, 2.6rem); line-height: 1.1; letter-spacing: -0.015em; margin: 0 0 10px; max-width: 22ch; text-wrap: balance; }
+.chapter .deck { color: var(--muted); max-width: var(--measure); margin: 0 0 20px; font-size: 1.15rem; }
+.figure { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 16px 0; margin: 0 0 22px; }
+.figure b { font-family: var(--serif); font-weight: 500; font-size: clamp(2.4rem, 5vw, 3.6rem); line-height: 1; letter-spacing: -0.02em; margin-right: 14px; }
+.figure span { color: var(--muted); }
+.chapter h4 { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dawn); margin: 20px 0 6px; }
+.chapter p, .chapter ul { max-width: var(--measure); margin: 0 0 10px; }
+.chapter ul { padding-left: 1.2em; }
+.chapter li { margin-bottom: 6px; }
+.aside .illus { background: var(--panel); border: 1px solid var(--line); padding: 18px; }
+.chapter:nth-of-type(odd) .aside .illus { background: var(--bg); border-color: var(--hairline); }
+.aside .illus svg { width: 100%; height: auto; display: block; }
+.aside figcaption { color: var(--muted); font-size: 0.9rem; margin-top: 10px; }
+.aside h4 { margin-top: 24px; }
 .chips { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 0; padding: 0; max-width: none; }
-.chips li { border: 1px solid var(--line); padding: 3px 10px; font-size: 0.9rem; color: var(--muted); margin: 0; }
-.record-note { color: var(--muted); font-size: 0.95rem; max-width: var(--measure); }
+.chips li { border: 1px solid var(--line); background: var(--panel); padding: 3px 11px; font-size: 0.9rem; color: var(--muted); margin: 0; border-radius: 999px; }
+.chapter:nth-of-type(odd) .chips li { background: var(--bg); border-color: var(--hairline); }
+.aside .onrec { color: var(--muted); font-size: 0.95rem; }
 
+/* Record */
+.record { padding: clamp(54px, 10vh, 100px) 0 0; }
+.filters { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; padding: 0; }
+.filters button { font: inherit; font-size: 0.92rem; font-weight: 600; color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+.filters button:hover { border-color: var(--dawn); color: var(--dawn); }
+.filters button[aria-pressed="true"] { background: var(--dawn); border-color: var(--dawn); color: var(--dawn-ink); }
 .tbl { background: var(--panel); border: 1px solid var(--line); overflow-x: auto; }
 table { border-collapse: collapse; width: 100%; font-size: 0.98rem; }
-th { text-align: left; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 12px 16px; border-bottom: 1px solid var(--line); }
-td { padding: 11px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { text-align: left; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 12px 16px; border-bottom: 1px solid var(--line); }
+td { padding: 11px 16px; border-bottom: 1px solid var(--hairline); vertical-align: top; }
 tr:last-child td { border-bottom: 0; }
+td:first-child { white-space: nowrap; font-variant-numeric: tabular-nums; color: var(--muted); }
 td .who { color: var(--muted); display: block; font-size: 0.92rem; }
-.back { display: inline-block; font-size: 0.85rem; font-weight: 650; letter-spacing: 0.04em; color: var(--dawn-ink); background: var(--dawn); padding: 1px 8px; border-radius: 2px; white-space: nowrap; }
+.back { display: inline-block; font-size: 0.8rem; font-weight: 650; letter-spacing: 0.04em; color: var(--dawn-ink); background: var(--dawn); padding: 1px 9px; border-radius: 999px; white-space: nowrap; }
+.record-note { color: var(--muted); font-size: 0.98rem; max-width: var(--measure); margin-top: 16px; }
 
-.btn { display: inline-block; padding: 12px 22px; border-radius: 999px; font-weight: 650; text-decoration: none; border: 1.5px solid transparent; }
+/* Close */
+.close { margin: clamp(56px, 10vh, 104px) 0 0; background: linear-gradient(135deg, var(--band), var(--panel)); border: 1px solid var(--line); padding: clamp(34px, 6vw, 70px); text-align: center; }
+.close h2 { max-width: 24ch; margin-left: auto; margin-right: auto; text-wrap: balance; }
+.close p { max-width: 54ch; margin: 0 auto 24px; color: var(--muted); }
+.btn { display: inline-block; padding: 14px 28px; border-radius: 999px; font-weight: 650; text-decoration: none; border: 1.5px solid transparent; }
 .btn-primary { background: var(--dawn); color: var(--dawn-ink); }
-.btn-primary:hover { background: #135A36; text-decoration: none; }
-.cta { margin: 30px 0 0; }
+.btn-primary:hover { background: var(--dawn-deep); text-decoration: none; }
 
-footer { border-top: 1px solid var(--line); margin-top: clamp(40px, 7vw, 70px); padding: 28px 0 40px; color: var(--muted); font-size: 0.95rem; }
+footer { border-top: 1px solid var(--line); margin-top: clamp(40px, 7vh, 70px); padding: 28px 0 40px; color: var(--muted); font-size: 0.95rem; }
 footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
 
-@media (max-width: 860px) {
+/* Reveal, only when scripting is on, so the page is complete without it */
+html.js .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }
+html.js .reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html.js .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+@media (max-width: 920px) {
+  .chapter .grid { grid-template-columns: 1fr; }
   .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .chapter .mark { font-size: clamp(5rem, 22vw, 8rem); }
 }
 @media (max-width: 640px) {
   body { font-size: 1.0625rem; }
@@ -169,22 +217,100 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   <div class="wrap lead">
     <p class="kicker">Portfolio, client work in 2026</p>
     <h1>Built, tested, handed over.</h1>
-    <p>Thirty client contracts from January to September 2026, for clients in the United States, the United Kingdom, Australia and beyond. The eight stories below say what each client needed, what I built and what came of it, and the table after them lists the rest of the record.</p>
+    <p>Thirty client contracts from January to September 2026, for clients in the United States, the United Kingdom, Australia and beyond. The eight stories below say what each client needed, what I built and what came of it, and the record after them lists the rest.</p>
     <p class="note">Clients stay unnamed, because their systems, data and messages are theirs. Every figure on this page comes from delivery reports, logs, test runs and the project records as they stood on 31 October 2026.</p>
     <ul class="stats">
-      <li><b>30</b><span>client contracts, January to September 2026</span></li>
-      <li><b>5</b><span>clients came back, for nine more contracts</span></li>
-      <li><b>128</b><span>checks in my open code, ready for you to run</span></li>
-      <li><b>7</b><span>public repositories, every check named</span></li>
+      <li class="reveal"><b data-count="30">30</b><span>client contracts, January to September 2026</span></li>
+      <li class="reveal"><b data-count="5">5</b><span>clients came back, for nine more contracts</span></li>
+      <li class="reveal"><b data-count="128">128</b><span>checks in my open code, ready for you to run</span></li>
+      <li class="reveal"><b data-count="7">7</b><span>public repositories, every check named</span></li>
     </ul>
+    <figure class="timeline reveal">
+      <svg viewBox="0 0 1000 230" role="img" aria-label="The 26 listed contracts of 2026 in the order they began, with arcs joining a returning client's contracts" preserveAspectRatio="xMidYMid meet">
+<line x1="30" y1="190" x2="970" y2="190" stroke="#9CCBE2" stroke-width="1.5"/>
+<text x="32" y="218" font-size="15" fill="#42604F" text-anchor="middle" font-family="inherit">Jan</text>
+<text x="145" y="218" font-size="15" fill="#42604F" text-anchor="middle" font-family="inherit">Feb</text>
+<text x="248" y="218" font-size="15" fill="#42604F" text-anchor="middle" font-family="inherit">Mar</text>
+<text x="361" y="218" font-size="15" fill="#42604F" text-anchor="middle" font-family="inherit">Apr</text>
+<text x="471" y="218" font-size="15" fill="#42604F" text-anchor="middle" font-family="inherit">May</text>
+<text x="584" y="218" font-size="15" fill="#42604F" text-anchor="middle" font-family="inherit">Jun</text>
+<text x="694" y="218" font-size="15" fill="#42604F" text-anchor="middle" font-family="inherit">Jul</text>
+<text x="807" y="218" font-size="15" fill="#42604F" text-anchor="middle" font-family="inherit">Aug</text>
+<text x="921" y="218" font-size="15" fill="#42604F" text-anchor="middle" font-family="inherit">Sep</text>
+<path d="M 141.5 78.0 Q 165.2 36.6 189.0 78.0" fill="none" stroke="#7FB4D1" stroke-width="1.6"/>
+<path d="M 189.0 78.0 Q 215.4 36.2 241.9 78.0" fill="none" stroke="#7FB4D1" stroke-width="1.6"/>
+<path d="M 331.7 78.0 Q 412.2 28.5 492.7 78.0" fill="none" stroke="#7FB4D1" stroke-width="1.6"/>
+<path d="M 532.9 78.0 Q 549.4 37.6 565.9 78.0" fill="none" stroke="#7FB4D1" stroke-width="1.6"/>
+<path d="M 565.9 78.0 Q 628.9 31.0 691.9 78.0" fill="none" stroke="#7FB4D1" stroke-width="1.6"/>
+<path d="M 691.9 78.0 Q 729.5 34.6 767.1 78.0" fill="none" stroke="#7FB4D1" stroke-width="1.6"/>
+<line x1="68.3" y1="190" x2="68.3" y2="112.0" stroke="#186A42" stroke-width="3"><title>25 Jan, Booking sync plugin, WordPress to Beds24</title></line>
+<circle cx="68.3" cy="103.0" r="7.5" fill="#E8F4FB" stroke="#186A42" stroke-width="2.5"/>
+<line x1="79.3" y1="190" x2="79.3" y2="112.0" stroke="#186A42" stroke-width="3"><title>28 Jan, Roadmap move to Planner Basic</title></line>
+<circle cx="79.3" cy="103.0" r="7.5" fill="#E8F4FB" stroke="#186A42" stroke-width="2.5"/>
+<line x1="141.5" y1="190" x2="141.5" y2="78.0" stroke="#163A2C" stroke-width="2.2"><title>14 Feb, Vehicle data enrichment by VIN</title></line>
+<line x1="156.1" y1="190" x2="156.1" y2="112.0" stroke="#7FB4D1" stroke-width="2.2"><title>18 Feb, SEO reporting dashboard</title></line>
+<line x1="178.0" y1="190" x2="178.0" y2="112.0" stroke="#7FB4D1" stroke-width="2.2"><title>24 Feb, Operations and sales systems</title></line>
+<line x1="189.0" y1="190" x2="189.0" y2="78.0" stroke="#163A2C" stroke-width="2.2"><title>27 Feb, Real estate research</title></line>
+<line x1="214.6" y1="190" x2="214.6" y2="112.0" stroke="#7FB4D1" stroke-width="2.2"><title>6 Mar, AppleScript update for macOS Tahoe</title></line>
+<line x1="225.6" y1="190" x2="225.6" y2="112.0" stroke="#7FB4D1" stroke-width="2.2"><title>9 Mar, USPS address compliance pilot</title></line>
+<line x1="241.9" y1="190" x2="241.9" y2="78.0" stroke="#163A2C" stroke-width="2.2"><title>11 Mar, Market sizing agent</title></line>
+<line x1="276.8" y1="190" x2="276.8" y2="112.0" stroke="#7FB4D1" stroke-width="2.2"><title>23 Mar, Trading expert advisor</title></line>
+<line x1="291.5" y1="190" x2="291.5" y2="112.0" stroke="#7FB4D1" stroke-width="2.2"><title>27 Mar, PDF templates with conditional logic</title></line>
+<line x1="300.5" y1="190" x2="300.5" y2="112.0" stroke="#186A42" stroke-width="3"><title>27 Mar, Service and maintenance desk</title></line>
+<circle cx="300.5" cy="103.0" r="7.5" fill="#E8F4FB" stroke="#186A42" stroke-width="2.5"/>
+<line x1="313.4" y1="190" x2="313.4" y2="112.0" stroke="#7FB4D1" stroke-width="2.2"><title>2 Apr, Medical citations on Amazon Bedrock</title></line>
+<line x1="331.7" y1="190" x2="331.7" y2="78.0" stroke="#163A2C" stroke-width="2.2"><title>7 Apr, Outlook add in for classic Outlook</title></line>
+<line x1="386.6" y1="190" x2="386.6" y2="112.0" stroke="#186A42" stroke-width="3"><title>22 Apr, HTTPS for the SAP Host Agent</title></line>
+<circle cx="386.6" cy="103.0" r="7.5" fill="#E8F4FB" stroke="#186A42" stroke-width="2.5"/>
+<line x1="401.2" y1="190" x2="401.2" y2="112.0" stroke="#7FB4D1" stroke-width="2.2"><title>26 Apr, SharePoint integration</title></line>
+<line x1="434.1" y1="190" x2="434.1" y2="78.0" stroke="#163A2C" stroke-width="2.2"><title>5 May, Camera control web UI</title></line>
+<line x1="492.7" y1="190" x2="492.7" y2="78.0" stroke="#163A2C" stroke-width="2.2"><title>21 May, Office.js add in, Sprint One</title></line>
+<line x1="532.9" y1="190" x2="532.9" y2="78.0" stroke="#186A42" stroke-width="3"><title>1 Jun, Impact analysis web app, stage 1</title></line>
+<circle cx="532.9" cy="69.0" r="7.5" fill="#E8F4FB" stroke="#186A42" stroke-width="2.5"/>
+<line x1="565.9" y1="190" x2="565.9" y2="78.0" stroke="#186A42" stroke-width="3"><title>10 Jun, Impact analysis web app, stage 2</title></line>
+<circle cx="565.9" cy="69.0" r="7.5" fill="#E8F4FB" stroke="#186A42" stroke-width="2.5"/>
+<line x1="598.8" y1="190" x2="598.8" y2="112.0" stroke="#186A42" stroke-width="3"><title>19 Jun, Production readiness testing</title></line>
+<circle cx="598.8" cy="103.0" r="7.5" fill="#E8F4FB" stroke="#186A42" stroke-width="2.5"/>
+<line x1="679.3" y1="190" x2="679.3" y2="112.0" stroke="#186A42" stroke-width="3"><title>11 Jul, Funnel backend to CRM</title></line>
+<circle cx="679.3" cy="103.0" r="7.5" fill="#E8F4FB" stroke="#186A42" stroke-width="2.5"/>
+<line x1="691.9" y1="190" x2="691.9" y2="78.0" stroke="#186A42" stroke-width="3"><title>12 Jul, Impact analysis web app, stage 3</title></line>
+<circle cx="691.9" cy="69.0" r="7.5" fill="#E8F4FB" stroke="#186A42" stroke-width="2.5"/>
+<line x1="704.9" y1="190" x2="704.9" y2="112.0" stroke="#7FB4D1" stroke-width="2.2"><title>18 Jul, Website performance review</title></line>
+<line x1="767.1" y1="190" x2="767.1" y2="78.0" stroke="#186A42" stroke-width="3"><title>4 Aug, Impact analysis web app, stage 4</title></line>
+<circle cx="767.1" cy="69.0" r="7.5" fill="#E8F4FB" stroke="#186A42" stroke-width="2.5"/>
+<line x1="924.4" y1="190" x2="924.4" y2="112.0" stroke="#186A42" stroke-width="3"><title>16 Sep, HubSpot rebuild with LinkedIn</title></line>
+<circle cx="924.4" cy="103.0" r="7.5" fill="#E8F4FB" stroke="#186A42" stroke-width="2.5"/>
+</svg>
+      <figcaption>
+        <i><span class="dotline" style="border-color:#7FB4D1"></span>one stem per listed contract</i>
+        <i><span class="dotline" style="border-color:#163A2C"></span>a taller stem, the client came back</i>
+        <i><span class="ring"></span>told as a story below</i>
+        <i>arcs join a returning client's contracts where both are listed</i>
+      </figcaption>
+    </figure>
   </div>
 
-  <section id="cases" aria-labelledby="cases-title">
+  <section class="cases-head" id="cases" aria-labelledby="cases-title">
     <div class="wrap">
-      <h2 id="cases-title">Eight jobs up close</h2>
-      <p class="sub">Chosen because the record holds the most detail on each of them.</p>
+      <h2 id="cases-title" class="reveal">Eight jobs up close</h2>
+      <p class="sub reveal">Chosen because the record holds the most detail on each of them.</p>
+      <ul class="case-index reveal" aria-label="Jump to a case">
+        <li><a href="#case-1">01 Impact analysis</a></li>
+        <li><a href="#case-2">02 API readiness</a></li>
+        <li><a href="#case-3">03 Planner move</a></li>
+        <li><a href="#case-4">04 SAP HTTPS</a></li>
+        <li><a href="#case-5">05 HubSpot rebuild</a></li>
+        <li><a href="#case-6">06 Funnel backend</a></li>
+        <li><a href="#case-7">07 Booking sync</a></li>
+        <li><a href="#case-8">08 Service desk</a></li>
+      </ul>
+    </div>
+  </section>
 
-      <article class="case">
+  <article class="chapter" id="case-1">
+    <p class="mark" aria-hidden="true">01</p>
+    <div class="wrap grid">
+      <div class="reveal">
         <p class="kicker">Case 01, startup founder, United States, June to October 2026</p>
         <h3>See what a change breaks before you make it</h3>
         <p class="deck">A web app that maps how the parts of a product depend on each other, so the team sees the impact of a change before anyone touches it. Delivered over four stages, each approved by the client.</p>
@@ -199,11 +325,36 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
           <li>A data browser with search, consistent editing, depth and type filters, and sign in for the whole team.</li>
         </ul>
         <h4>What came of it</h4>
-        <p>Four stages, each approved. The stage 3 acceptance test set a five second target for a result on 1,000 records, and the client accepted it. On record: the stage agreements with their acceptance tests, evidence documents, and before and after screen recordings. The code lives in the client's own GitHub.</p>
+        <p>Four stages, each approved. The stage 3 acceptance test set a five second target for a result on 1,000 records, and the client accepted it.</p>
+      </div>
+      <aside class="aside reveal">
+        <figure class="illus">
+          <svg viewBox="0 0 320 190" aria-hidden="true">
+            <circle cx="52" cy="95" r="13" fill="#186A42"/>
+            <circle cx="52" cy="95" r="34" fill="none" stroke="#9CCBE2" stroke-width="1.5"/>
+            <circle cx="52" cy="95" r="60" fill="none" stroke="#BFDDEC" stroke-width="1.5"/>
+            <path d="M 64 88 L 132 56 L 206 76 L 272 44" fill="none" stroke="#163A2C" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="132" cy="56" r="8" fill="#FFFFFF" stroke="#163A2C" stroke-width="2.5"/>
+            <circle cx="206" cy="76" r="8" fill="#FFFFFF" stroke="#163A2C" stroke-width="2.5"/>
+            <circle cx="272" cy="44" r="8" fill="#87CEEB" stroke="#163A2C" stroke-width="2.5"/>
+            <path d="M 64 104 L 136 136 L 208 150" fill="none" stroke="#7FB4D1" stroke-width="2"/>
+            <circle cx="136" cy="136" r="6" fill="#FFFFFF" stroke="#7FB4D1" stroke-width="2"/>
+            <circle cx="208" cy="150" r="6" fill="#FFFFFF" stroke="#7FB4D1" stroke-width="2"/>
+          </svg>
+          <figcaption>A change spreads one hop at a time, and the bold line is the path behind one result. An illustration, not a client screen.</figcaption>
+        </figure>
+        <h4>Tools</h4>
         <ul class="chips"><li>React</li><li>React Flow</li><li>.NET 8</li><li>C#</li><li>Neo4j</li><li>AWS Amplify</li><li>Amazon Cognito</li><li>AWS Elastic Beanstalk</li><li>Amazon CloudFront</li></ul>
-      </article>
+        <h4>On record</h4>
+        <p class="onrec">Stage agreements with their acceptance tests, evidence documents, and before and after screen recordings. The code lives in the client's own GitHub.</p>
+      </aside>
+    </div>
+  </article>
 
-      <article class="case">
+  <article class="chapter" id="case-2">
+    <p class="mark" aria-hidden="true">02</p>
+    <div class="wrap grid">
+      <div class="reveal">
         <p class="kicker">Case 02, insurance software company, United States, June to July 2026</p>
         <h3>A readiness test, straight through the API</h3>
         <p class="deck">Before launch, the backend was tested directly, without clicking through the app, and the findings written up for the team.</p>
@@ -216,11 +367,35 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
           <li>A seven page readiness report from a three week sprint.</li>
         </ul>
         <h4>What came of it</h4>
-        <p>Thirteen areas of the backend confirmed working. On record: the readiness report and the full test suite.</p>
+        <p>Thirteen areas of the backend confirmed working.</p>
+      </div>
+      <aside class="aside reveal">
+        <figure class="illus">
+          <svg viewBox="0 0 320 190" aria-hidden="true">
+            <rect x="228" y="55" width="66" height="80" rx="6" fill="#186A42"/>
+            <rect x="243" y="83" width="36" height="5" rx="2.5" fill="#E9F3ED"/>
+            <rect x="243" y="97" width="36" height="5" rx="2.5" fill="#E9F3ED"/>
+            <rect x="243" y="111" width="24" height="5" rx="2.5" fill="#87CEEB"/>
+            <g stroke="#163A2C" stroke-width="2" fill="none" stroke-linecap="round">
+              <path d="M 26 65 H 196"/><path d="M 26 95 H 196"/><path d="M 26 125 H 196"/>
+            </g>
+            <g fill="#163A2C"><path d="M 196 60 l 12 5 l -12 5 z"/><path d="M 196 90 l 12 5 l -12 5 z"/><path d="M 196 120 l 12 5 l -12 5 z"/></g>
+            <rect x="60" y="30" width="110" height="130" rx="8" fill="none" stroke="#9CCBE2" stroke-width="1.6" stroke-dasharray="5 6"/>
+          </svg>
+          <figcaption>Thirty test files talk to the API directly, past the app screens shown dashed. An illustration, not a client screen.</figcaption>
+        </figure>
+        <h4>Tools</h4>
         <ul class="chips"><li>Playwright</li><li>TypeScript</li><li>REST APIs</li></ul>
-      </article>
+        <h4>On record</h4>
+        <p class="onrec">The readiness report and the full test suite.</p>
+      </aside>
+    </div>
+  </article>
 
-      <article class="case">
+  <article class="chapter" id="case-3">
+    <p class="mark" aria-hidden="true">03</p>
+    <div class="wrap grid">
+      <div class="reveal">
         <p class="kicker">Case 03, software company, United States, January to February 2026</p>
         <h3>A product roadmap moved to Planner Basic</h3>
         <p class="deck">A roadmap moved from Planner Premium to a simpler plan type by a flow, with no copying by hand.</p>
@@ -235,11 +410,38 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
           <li>Built inside their own tenant as a portable package, with the group and plan as inputs, so it can run again on another plan.</li>
         </ul>
         <h4>What came of it</h4>
-        <p>More than 400 tasks moved with the structure kept. On record: the delivery checklist and the exported flow.</p>
+        <p>More than 400 tasks moved with the structure kept.</p>
+      </div>
+      <aside class="aside reveal">
+        <figure class="illus">
+          <svg viewBox="0 0 320 190" aria-hidden="true">
+            <rect x="24" y="36" width="92" height="16" rx="4" fill="#163A2C"/>
+            <rect x="40" y="62" width="76" height="12" rx="4" fill="#7FB4D1"/>
+            <rect x="40" y="82" width="76" height="12" rx="4" fill="#7FB4D1"/>
+            <rect x="40" y="102" width="76" height="12" rx="4" fill="#7FB4D1"/>
+            <path d="M 136 92 H 176" stroke="#186A42" stroke-width="3" stroke-linecap="round"/>
+            <path d="M 176 87 l 12 5 l -12 5 z" fill="#186A42"/>
+            <rect x="200" y="34" width="96" height="122" rx="8" fill="#FFFFFF" stroke="#163A2C" stroke-width="2"/>
+            <rect x="212" y="48" width="72" height="14" rx="4" fill="#163A2C"/>
+            <g stroke="#186A42" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M 216 82 l 4 5 l 8 -9"/><path d="M 216 106 l 4 5 l 8 -9"/><path d="M 216 130 l 4 5 l 8 -9"/>
+            </g>
+            <g fill="#42604F"><rect x="236" y="80" width="48" height="6" rx="3"/><rect x="236" y="104" width="48" height="6" rx="3"/><rect x="236" y="128" width="40" height="6" rx="3"/></g>
+          </svg>
+          <figcaption>Parents become cards and children become checklist items, ticked when done. An illustration, not a client screen.</figcaption>
+        </figure>
+        <h4>Tools</h4>
         <ul class="chips"><li>Power Automate</li><li>Microsoft Planner</li><li>Microsoft Teams</li><li>Excel</li></ul>
-      </article>
+        <h4>On record</h4>
+        <p class="onrec">The delivery checklist and the exported flow.</p>
+      </aside>
+    </div>
+  </article>
 
-      <article class="case">
+  <article class="chapter" id="case-4">
+    <p class="mark" aria-hidden="true">04</p>
+    <div class="wrap grid">
+      <div class="reveal">
         <p class="kicker">Case 04, software company, United States, April to May 2026</p>
         <h3>HTTPS to the SAP Host Agent</h3>
         <p class="deck">A secure connection the SAP system refused was set up and tested, from "Peer not trusted" to a clean connection.</p>
@@ -253,11 +455,38 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
           <li>An HTTPS destination built and tested in SM59.</li>
         </ul>
         <h4>What came of it</h4>
-        <p>The connection test returned 200 OK. On record: the full email thread with their team.</p>
+        <p>The connection test returned 200 OK.</p>
+      </div>
+      <aside class="aside reveal">
+        <figure class="illus">
+          <svg viewBox="0 0 320 190" aria-hidden="true">
+            <rect x="26" y="60" width="74" height="70" rx="8" fill="#FFFFFF" stroke="#163A2C" stroke-width="2"/>
+            <rect x="40" y="76" width="46" height="7" rx="3.5" fill="#7FB4D1"/>
+            <rect x="40" y="92" width="46" height="7" rx="3.5" fill="#7FB4D1"/>
+            <rect x="40" y="108" width="30" height="7" rx="3.5" fill="#7FB4D1"/>
+            <rect x="220" y="60" width="74" height="70" rx="8" fill="#FFFFFF" stroke="#163A2C" stroke-width="2"/>
+            <rect x="234" y="76" width="46" height="7" rx="3.5" fill="#7FB4D1"/>
+            <rect x="234" y="92" width="46" height="7" rx="3.5" fill="#7FB4D1"/>
+            <rect x="234" y="108" width="30" height="7" rx="3.5" fill="#7FB4D1"/>
+            <path d="M 104 95 H 216" stroke="#186A42" stroke-width="3.4" stroke-linecap="round"/>
+            <rect x="143" y="76" width="34" height="27" rx="5" fill="#186A42"/>
+            <path d="M 150 76 v -8 a 10 10 0 0 1 20 0 v 8" fill="none" stroke="#186A42" stroke-width="4"/>
+            <circle cx="160" cy="89" r="3.6" fill="#E9F3ED"/>
+          </svg>
+          <figcaption>Trust set up between the two systems, so the refused connection closes clean. An illustration, not a client screen.</figcaption>
+        </figure>
+        <h4>Tools</h4>
         <ul class="chips"><li>SAP Host Agent</li><li>STRUST</li><li>SM59</li></ul>
-      </article>
+        <h4>On record</h4>
+        <p class="onrec">The full email thread with their team.</p>
+      </aside>
+    </div>
+  </article>
 
-      <article class="case">
+  <article class="chapter" id="case-5">
+    <p class="mark" aria-hidden="true">05</p>
+    <div class="wrap grid">
+      <div class="reveal">
         <p class="kicker">Case 05, B2B partner network, Australia, September to October 2026</p>
         <h3>A clean HubSpot rebuild</h3>
         <p class="deck">Duplicate records merged into one clean CRM, with the LinkedIn conversation notes kept on the right people.</p>
@@ -272,11 +501,39 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
           <li>Six shared views and a daily dashboard checked against the live portal, with guides and a recorded walkthrough.</li>
         </ul>
         <h4>What came of it</h4>
-        <p>1,540 people linked to their own organisation with none out of place, and all 382 unique LinkedIn conversation notes kept. No duplicates were left, and it was all built on the plan they already paid for. On record: the audit, the pilot and merge reports, the merge log, both guides and the walkthrough recording.</p>
+        <p>1,540 people linked to their own organisation with none out of place, and all 382 unique LinkedIn conversation notes kept. No duplicates were left, and it was all built on the plan they already paid for.</p>
+      </div>
+      <aside class="aside reveal">
+        <figure class="illus">
+          <svg viewBox="0 0 320 190" aria-hidden="true">
+            <g fill="#7FB4D1">
+              <circle cx="40" cy="52" r="9"/><circle cx="66" cy="44" r="9"/><circle cx="52" cy="78" r="9"/>
+              <circle cx="44" cy="118" r="9"/><circle cx="70" cy="128" r="9"/><circle cx="58" cy="150" r="9"/>
+            </g>
+            <path d="M 94 70 C 130 70 130 95 160 95 M 94 128 C 130 128 130 95 160 95" fill="none" stroke="#9CCBE2" stroke-width="2"/>
+            <path d="M 160 95 H 196" stroke="#186A42" stroke-width="3" stroke-linecap="round"/>
+            <path d="M 196 90 l 12 5 l -12 5 z" fill="#186A42"/>
+            <circle cx="248" cy="78" r="13" fill="#186A42"/>
+            <circle cx="248" cy="78" r="21" fill="none" stroke="#186A42" stroke-width="2"/>
+            <rect x="230" y="112" width="60" height="34" rx="6" fill="#FFFFFF" stroke="#163A2C" stroke-width="2"/>
+            <path d="M 248 99 v 13" stroke="#163A2C" stroke-width="2"/>
+            <rect x="240" y="122" width="40" height="5" rx="2.5" fill="#42604F"/>
+            <rect x="240" y="133" width="28" height="5" rx="2.5" fill="#42604F"/>
+          </svg>
+          <figcaption>The same people, many times over, become one record each, linked to its company. An illustration, not a client screen.</figcaption>
+        </figure>
+        <h4>Tools</h4>
         <ul class="chips"><li>HubSpot</li><li>HubSpot API</li><li>Surfe</li><li>LinkedIn</li><li>Python</li></ul>
-      </article>
+        <h4>On record</h4>
+        <p class="onrec">The audit, the pilot and merge reports, the merge log, both guides and the walkthrough recording.</p>
+      </aside>
+    </div>
+  </article>
 
-      <article class="case">
+  <article class="chapter" id="case-6">
+    <p class="mark" aria-hidden="true">06</p>
+    <div class="wrap grid">
+      <div class="reveal">
         <p class="kicker">Case 06, wellness business, United Kingdom, July to September 2026</p>
         <h3>Sign ups that flow straight into email</h3>
         <p class="deck">Assessment results wired into the CRM, and the email domain moved and secured.</p>
@@ -291,15 +548,43 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
           <li>Separate staging and production with a parity check that compares them, and GDPR processor documentation.</li>
         </ul>
         <h4>What came of it</h4>
-        <p>Four milestones accepted, with SPF, DKIM, DMARC and DNSSEC all in place on the new DNS. On record: the test matrix, the evidence packs, the handover note and the parity check.</p>
+        <p>Four milestones accepted, with SPF, DKIM, DMARC and DNSSEC all in place on the new DNS.</p>
+      </div>
+      <aside class="aside reveal">
+        <figure class="illus">
+          <svg viewBox="0 0 320 190" aria-hidden="true">
+            <rect x="22" y="62" width="72" height="66" rx="8" fill="#FFFFFF" stroke="#163A2C" stroke-width="2"/>
+            <rect x="34" y="76" width="48" height="7" rx="3.5" fill="#7FB4D1"/>
+            <rect x="34" y="92" width="48" height="7" rx="3.5" fill="#7FB4D1"/>
+            <rect x="34" y="108" width="32" height="7" rx="3.5" fill="#87CEEB"/>
+            <path d="M 98 95 H 126" stroke="#186A42" stroke-width="3" stroke-linecap="round"/>
+            <rect x="130" y="72" width="56" height="46" rx="8" fill="#186A42"/>
+            <circle cx="158" cy="95" r="10" fill="none" stroke="#E9F3ED" stroke-width="3"/>
+            <path d="M 190 95 H 218" stroke="#186A42" stroke-width="3" stroke-linecap="round"/>
+            <path d="M 218 90 l 12 5 l -12 5 z" fill="#186A42"/>
+            <rect x="236" y="62" width="62" height="66" rx="8" fill="#FFFFFF" stroke="#163A2C" stroke-width="2"/>
+            <path d="M 243 76 h 48 l -24 18 z" fill="none" stroke="#163A2C" stroke-width="2" stroke-linejoin="round"/>
+            <rect x="247" y="106" width="40" height="6" rx="3" fill="#42604F"/>
+            <rect x="130" y="134" width="56" height="16" rx="8" fill="#DDF0F9" stroke="#9CCBE2"/>
+          </svg>
+          <figcaption>Each result goes from the form through the Worker into the CRM; the links a person sees carry a lead id, never an email address. An illustration, not a client screen.</figcaption>
+        </figure>
+        <h4>Tools</h4>
         <ul class="chips"><li>Cloudflare Workers</li><li>Workers KV</li><li>Cloudflare DNS</li><li>Typeform</li><li>Systeme.io</li><li>Kickbox</li></ul>
-      </article>
+        <h4>On record</h4>
+        <p class="onrec">The test matrix, the evidence packs, the handover note and the parity check.</p>
+      </aside>
+    </div>
+  </article>
 
-      <article class="case">
+  <article class="chapter" id="case-7">
+    <p class="mark" aria-hidden="true">07</p>
+    <div class="wrap grid">
+      <div class="reveal">
         <p class="kicker">Case 07, holiday accommodation, United States, January to February 2026</p>
         <h3>Bookings sent from WordPress to Beds24</h3>
         <p class="deck">Bookings taken on their own website are sent to their channel manager, for six units.</p>
-        <p class="figure"><b>6</b><span>units mapped to Beds24</span></p>
+        <p class="figure"><b>6</b><span>units mapped to Beds24, zero double bookings</span></p>
         <h4>What they needed</h4>
         <p>Each booking taken on their own site had to reach Beds24, and changes and cancellations had to follow.</p>
         <h4>What I built</h4>
@@ -310,11 +595,41 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
           <li>A queue that runs five jobs a minute, a resync panel and a log in the admin.</li>
         </ul>
         <h4>What came of it</h4>
-        <p>Zero double bookings across the six units. On record: the plugin source and the go live checklist.</p>
+        <p>Zero double bookings across the six units.</p>
+      </div>
+      <aside class="aside reveal">
+        <figure class="illus">
+          <svg viewBox="0 0 320 190" aria-hidden="true">
+            <rect x="24" y="58" width="70" height="74" rx="8" fill="#FFFFFF" stroke="#163A2C" stroke-width="2"/>
+            <rect x="36" y="72" width="46" height="8" rx="4" fill="#163A2C"/>
+            <rect x="36" y="90" width="46" height="7" rx="3.5" fill="#7FB4D1"/>
+            <rect x="36" y="106" width="30" height="7" rx="3.5" fill="#7FB4D1"/>
+            <g fill="#186A42"><circle cx="116" cy="95" r="5"/><circle cx="136" cy="95" r="5"/><circle cx="156" cy="95" r="5"/><circle cx="176" cy="95" r="5"/><circle cx="196" cy="95" r="5"/></g>
+            <rect x="216" y="50" width="82" height="90" rx="8" fill="#FFFFFF" stroke="#163A2C" stroke-width="2"/>
+            <g fill="#DDF0F9" stroke="#9CCBE2">
+              <rect x="228" y="64" width="18" height="16" rx="3"/><rect x="250" y="64" width="18" height="16" rx="3"/><rect x="272" y="64" width="18" height="16" rx="3"/>
+              <rect x="228" y="86" width="18" height="16" rx="3"/><rect x="250" y="86" width="18" height="16" rx="3"/><rect x="272" y="86" width="18" height="16" rx="3"/>
+            </g>
+            <g stroke="#186A42" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M 232 70 l 3 4 l 7 -7"/><path d="M 254 70 l 3 4 l 7 -7"/><path d="M 276 70 l 3 4 l 7 -7"/>
+              <path d="M 232 92 l 3 4 l 7 -7"/><path d="M 254 92 l 3 4 l 7 -7"/><path d="M 276 92 l 3 4 l 7 -7"/>
+            </g>
+            <rect x="228" y="112" width="62" height="7" rx="3.5" fill="#42604F"/>
+          </svg>
+          <figcaption>Each booking moves through a background queue into the channel manager, one tick per unit. An illustration, not a client screen.</figcaption>
+        </figure>
+        <h4>Tools</h4>
         <ul class="chips"><li>WordPress</li><li>PHP</li><li>HBook</li><li>Beds24 API</li><li>WP Cron</li></ul>
-      </article>
+        <h4>On record</h4>
+        <p class="onrec">The plugin source and the go live checklist.</p>
+      </aside>
+    </div>
+  </article>
 
-      <article class="case">
+  <article class="chapter" id="case-8">
+    <p class="mark" aria-hidden="true">08</p>
+    <div class="wrap grid">
+      <div class="reveal">
         <p class="kicker">Case 08, field service company, United Kingdom, from March 2026</p>
         <h3>A service desk in Bitrix24</h3>
         <p class="deck">A simple service and maintenance desk for a virtual assistant and staff in the field.</p>
@@ -326,50 +641,83 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
           <li>A service and maintenance smart process in Bitrix24, separate from sales deals so field staff are not searching through them in the mobile app.</li>
         </ul>
         <h4>What came of it</h4>
-        <p>In September they wrote again, asking for help with more of their CRM and project setup. On record: the emails with their office.</p>
+        <p>In September they wrote again, asking for help with more of their CRM and project setup.</p>
+      </div>
+      <aside class="aside reveal">
+        <figure class="illus">
+          <svg viewBox="0 0 320 190" aria-hidden="true">
+            <rect x="26" y="40" width="268" height="46" rx="8" fill="#FFFFFF" stroke="#9CCBE2" stroke-width="1.6"/>
+            <rect x="40" y="56" width="70" height="14" rx="4" fill="#BFDDEC"/>
+            <rect x="122" y="56" width="70" height="14" rx="4" fill="#BFDDEC"/>
+            <rect x="204" y="56" width="70" height="14" rx="4" fill="#BFDDEC"/>
+            <rect x="26" y="104" width="268" height="46" rx="8" fill="#FFFFFF" stroke="#186A42" stroke-width="2.2"/>
+            <rect x="40" y="120" width="70" height="14" rx="4" fill="#186A42"/>
+            <rect x="122" y="120" width="70" height="14" rx="4" fill="#186A42" opacity="0.72"/>
+            <rect x="204" y="120" width="70" height="14" rx="4" fill="#186A42" opacity="0.45"/>
+            <path d="M 300 127 m 0 -10 a 10 10 0 1 1 -0.01 0 M 300 117 v 10 l 7 4" fill="none" stroke="#163A2C" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+          <figcaption>Service work runs in its own lane, apart from sales deals, so the field app stays simple. An illustration, not a client screen.</figcaption>
+        </figure>
+        <h4>Tools</h4>
         <ul class="chips"><li>Bitrix24</li><li>Smart processes</li><li>Bitrix24 mobile</li></ul>
-      </article>
+        <h4>On record</h4>
+        <p class="onrec">The emails with their office.</p>
+      </aside>
     </div>
-  </section>
+  </article>
 
-  <section id="record" aria-labelledby="record-title">
+  <section class="record" id="record" aria-labelledby="record-title">
     <div class="wrap">
-      <h2 id="record-title">The full record, by date</h2>
-      <p class="sub">26 of the 30 contracts signed from January to September 2026. Four are not listed: three that closed or paused before anything was paid, and one whose result is not on record. Came back marks a new contract from a client who had hired me before, including the next stage of a project.</p>
-      <div class="tbl"><table>
+      <h2 id="record-title" class="reveal">The full record, by date</h2>
+      <p class="sub reveal">26 of the 30 contracts signed from January to September 2026. Four are not listed: three that closed or paused before anything was paid, and one whose result is not on record. Came back marks a new contract from a client who had hired me before, including the next stage of a project.</p>
+      <ul class="filters reveal" aria-label="Filter the record">
+        <li><button type="button" data-filter="all" aria-pressed="true">All 26</button></li>
+        <li><button type="button" data-filter="web" aria-pressed="false">Web and apps 8</button></li>
+        <li><button type="button" data-filter="m365" aria-pressed="false">Microsoft 365 4</button></li>
+        <li><button type="button" data-filter="crm" aria-pressed="false">CRM and sales 3</button></li>
+        <li><button type="button" data-filter="ai" aria-pressed="false">AI, data and research 6</button></li>
+        <li><button type="button" data-filter="cloud" aria-pressed="false">Cloud, systems and testing 3</button></li>
+        <li><button type="button" data-filter="auto" aria-pressed="false">Automation and scripting 2</button></li>
+      </ul>
+      <div class="tbl reveal"><table>
         <thead><tr><th>Began</th><th>Contract and client</th><th>Tools</th></tr></thead>
-        <tbody>
-          <tr><td>25 Jan</td><td>Booking sync plugin, WordPress to Beds24<span class="who">Holiday accommodation, US</span></td><td>WordPress, PHP, Beds24 API</td></tr>
-          <tr><td>28 Jan</td><td>Roadmap move from Planner Premium to Planner Basic<span class="who">Software company, US</span></td><td>Power Automate, Planner</td></tr>
-          <tr><td>14 Feb</td><td>Vehicle data enrichment by VIN, a paid test on 78 vehicles returned the same day it began<span class="who">Research client</span></td><td>Vehicle data APIs</td></tr>
-          <tr><td>18 Feb</td><td>SEO reporting dashboard<span class="who">Retail brand in several states</span></td><td>Looker Studio</td></tr>
-          <tr><td>24 Feb</td><td>Operations and sales systems, first stage<span class="who">Private client</span></td><td>GoHighLevel, Notion, Slack</td></tr>
-          <tr><td>27 Feb</td><td>Real estate research <span class="back">came back</span><span class="who">Research client</span></td><td>Research</td></tr>
-          <tr><td>6 Mar</td><td>AppleScript update for macOS Tahoe, the fix proven on two machines<span class="who">Private client</span></td><td>AppleScript, macOS</td></tr>
-          <tr><td>9 Mar</td><td>USPS address compliance pilot<span class="who">Private client</span></td><td>CASS, NCOA, DPV</td></tr>
-          <tr><td>11 Mar</td><td>Market sizing agent for TAM, SAM and SOM <span class="back">came back</span><span class="who">Research client</span></td><td>AI agent</td></tr>
-          <tr><td>23 Mar</td><td>Trading expert advisor, harmonic patterns<span class="who">Private client</span></td><td>MetaTrader 4, MQL4</td></tr>
-          <tr><td>27 Mar</td><td>PDF templates with conditional logic, proven in a sandbox video<span class="who">Private client</span></td><td>Documint</td></tr>
-          <tr><td>27 Mar</td><td>Service and maintenance desk<span class="who">Field service company, UK</span></td><td>Bitrix24</td></tr>
-          <tr><td>2 Apr</td><td>Medical citations for AI assistants, looked up in PubMed rather than invented<span class="who">Health education company</span></td><td>Amazon Bedrock, API Gateway</td></tr>
-          <tr><td>7 Apr</td><td>Outlook add in for classic Outlook, first build approved<span class="who">Software company, US</span></td><td>Office.js, Outlook</td></tr>
-          <tr><td>22 Apr</td><td>HTTPS for the SAP Host Agent<span class="who">Software company, US</span></td><td>SAP Host Agent, STRUST, SM59</td></tr>
-          <tr><td>26 Apr</td><td>SharePoint integration for a model driven app<span class="who">Consulting firm</span></td><td>SharePoint, Power Apps</td></tr>
-          <tr><td>5 May</td><td>Camera control web UI for Blackmagic cameras <span class="back">came back</span><span class="who">Private client</span></td><td>Web UI, Blackmagic cameras</td></tr>
-          <tr><td>21 May</td><td>Office.js add in, Sprint One <span class="back">came back</span><span class="who">Software company, US</span></td><td>Office.js, Outlook</td></tr>
-          <tr><td>1 Jun</td><td>Impact analysis web app, stage 1<span class="who">Startup founder, US</span></td><td>React, .NET 8, Neo4j</td></tr>
-          <tr><td>10 Jun</td><td>Impact analysis web app, stage 2 <span class="back">came back</span><span class="who">Startup founder, US</span></td><td>React, .NET 8, Neo4j, AWS</td></tr>
-          <tr><td>19 Jun</td><td>Production readiness testing<span class="who">Insurance software, US</span></td><td>Playwright, TypeScript</td></tr>
-          <tr><td>11 Jul</td><td>Funnel backend from assessment to CRM<span class="who">Wellness business, UK</span></td><td>Cloudflare Workers, Systeme.io</td></tr>
-          <tr><td>12 Jul</td><td>Impact analysis web app, stage 3 <span class="back">came back</span><span class="who">Startup founder, US</span></td><td>React, .NET 8, Neo4j, AWS</td></tr>
-          <tr><td>18 Jul</td><td>Website performance review, starting with why the free plan was not caching the site's pages<span class="who">Private client</span></td><td>Cloudflare</td></tr>
-          <tr><td>4 Aug</td><td>Impact analysis web app, stage 4 <span class="back">came back</span><span class="who">Startup founder, US</span></td><td>React, React Flow, .NET 8, Neo4j, AWS</td></tr>
-          <tr><td>16 Sep</td><td>HubSpot rebuild with LinkedIn<span class="who">B2B partner network, Australia</span></td><td>HubSpot, Surfe</td></tr>
+        <tbody id="record-rows">
+          <tr data-cat="web"><td>25 Jan</td><td>Booking sync plugin, WordPress to Beds24<span class="who">Holiday accommodation, US</span></td><td>WordPress, PHP, Beds24 API</td></tr>
+          <tr data-cat="m365"><td>28 Jan</td><td>Roadmap move from Planner Premium to Planner Basic<span class="who">Software company, US</span></td><td>Power Automate, Planner</td></tr>
+          <tr data-cat="ai"><td>14 Feb</td><td>Vehicle data enrichment by VIN, a paid test on 78 vehicles returned the same day it began<span class="who">Research client</span></td><td>Vehicle data APIs</td></tr>
+          <tr data-cat="ai"><td>18 Feb</td><td>SEO reporting dashboard<span class="who">Retail brand in several states</span></td><td>Looker Studio</td></tr>
+          <tr data-cat="crm"><td>24 Feb</td><td>Operations and sales systems, first stage<span class="who">Private client</span></td><td>GoHighLevel, Notion, Slack</td></tr>
+          <tr data-cat="ai"><td>27 Feb</td><td>Real estate research <span class="back">came back</span><span class="who">Research client</span></td><td>Research</td></tr>
+          <tr data-cat="auto"><td>6 Mar</td><td>AppleScript update for macOS Tahoe, the fix proven on two machines<span class="who">Private client</span></td><td>AppleScript, macOS</td></tr>
+          <tr data-cat="ai"><td>9 Mar</td><td>USPS address compliance pilot<span class="who">Private client</span></td><td>CASS, NCOA, DPV</td></tr>
+          <tr data-cat="ai"><td>11 Mar</td><td>Market sizing agent for TAM, SAM and SOM <span class="back">came back</span><span class="who">Research client</span></td><td>AI agent</td></tr>
+          <tr data-cat="auto"><td>23 Mar</td><td>Trading expert advisor, harmonic patterns<span class="who">Private client</span></td><td>MetaTrader 4, MQL4</td></tr>
+          <tr data-cat="web"><td>27 Mar</td><td>PDF templates with conditional logic, proven in a sandbox video<span class="who">Private client</span></td><td>Documint</td></tr>
+          <tr data-cat="crm"><td>27 Mar</td><td>Service and maintenance desk<span class="who">Field service company, UK</span></td><td>Bitrix24</td></tr>
+          <tr data-cat="ai"><td>2 Apr</td><td>Medical citations for AI assistants, looked up in PubMed rather than invented<span class="who">Health education company</span></td><td>Amazon Bedrock, API Gateway</td></tr>
+          <tr data-cat="m365"><td>7 Apr</td><td>Outlook add in for classic Outlook, first build approved<span class="who">Software company, US</span></td><td>Office.js, Outlook</td></tr>
+          <tr data-cat="cloud"><td>22 Apr</td><td>HTTPS for the SAP Host Agent<span class="who">Software company, US</span></td><td>SAP Host Agent, STRUST, SM59</td></tr>
+          <tr data-cat="m365"><td>26 Apr</td><td>SharePoint integration for a model driven app<span class="who">Consulting firm</span></td><td>SharePoint, Power Apps</td></tr>
+          <tr data-cat="web"><td>5 May</td><td>Camera control web UI for Blackmagic cameras <span class="back">came back</span><span class="who">Private client</span></td><td>Web UI, Blackmagic cameras</td></tr>
+          <tr data-cat="m365"><td>21 May</td><td>Office.js add in, Sprint One <span class="back">came back</span><span class="who">Software company, US</span></td><td>Office.js, Outlook</td></tr>
+          <tr data-cat="web"><td>1 Jun</td><td>Impact analysis web app, stage 1<span class="who">Startup founder, US</span></td><td>React, .NET 8, Neo4j</td></tr>
+          <tr data-cat="web"><td>10 Jun</td><td>Impact analysis web app, stage 2 <span class="back">came back</span><span class="who">Startup founder, US</span></td><td>React, .NET 8, Neo4j, AWS</td></tr>
+          <tr data-cat="cloud"><td>19 Jun</td><td>Production readiness testing<span class="who">Insurance software, US</span></td><td>Playwright, TypeScript</td></tr>
+          <tr data-cat="cloud"><td>11 Jul</td><td>Funnel backend from assessment to CRM<span class="who">Wellness business, UK</span></td><td>Cloudflare Workers, Systeme.io</td></tr>
+          <tr data-cat="web"><td>12 Jul</td><td>Impact analysis web app, stage 3 <span class="back">came back</span><span class="who">Startup founder, US</span></td><td>React, .NET 8, Neo4j, AWS</td></tr>
+          <tr data-cat="web"><td>18 Jul</td><td>Website performance review, starting with why the free plan was not caching the site's pages<span class="who">Private client</span></td><td>Cloudflare</td></tr>
+          <tr data-cat="web"><td>4 Aug</td><td>Impact analysis web app, stage 4 <span class="back">came back</span><span class="who">Startup founder, US</span></td><td>React, React Flow, .NET 8, Neo4j, AWS</td></tr>
+          <tr data-cat="crm"><td>16 Sep</td><td>HubSpot rebuild with LinkedIn<span class="who">B2B partner network, Australia</span></td><td>HubSpot, Surfe</td></tr>
         </tbody>
       </table></div>
-      <p class="record-note" style="margin-top:14px">The work above spans web and apps, Microsoft 365, CRM and sales, AI and data, cloud and testing, and automation, for IT and software companies and for businesses of every other kind. It is a record, not the whole list of what I take on.</p>
-      <p class="record-note">Client work stays private, so I publish my own tools in the open instead: 128 automated checks across seven public repositories, each one listed <a href="/#code">in the code section</a> with a test suite you can run.</p>
-      <p class="cta"><a class="btn btn-primary" href="/#contact">Talk to me about your project</a></p>
+      <p class="record-note reveal">The work above spans web and apps, Microsoft 365, CRM and sales, AI and data, cloud and testing, and automation, for IT and software companies and for businesses of every other kind. It is a record, not the whole list of what I take on.</p>
+      <p class="record-note reveal">Client work stays private, so I publish my own tools in the open instead: 128 automated checks across seven public repositories, each one listed <a href="/#code">in the code section</a> with a test suite you can run.</p>
+
+      <div class="close reveal">
+        <h2>The next system on this page could be yours.</h2>
+        <p>Tell me what your business runs on and where the work gets stuck, and I will tell you what I would build.</p>
+        <a class="btn btn-primary" href="/#contact">Talk to me about your project</a>
+      </div>
     </div>
   </section>
 </main>
@@ -380,5 +728,57 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     <span>Mauritius</span>
   </div>
 </footer>
+
+<script>
+(function () {
+  "use strict";
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var revealed = document.querySelectorAll(".reveal");
+
+  function countUp(el) {
+    var target = parseInt(el.getAttribute("data-count"), 10);
+    if (!target || reduced) { el.textContent = el.getAttribute("data-count"); return; }
+    var start = null, dur = 900;
+    function step(ts) {
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      el.textContent = String(Math.round(target * (1 - Math.pow(1 - p, 3))));
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  if (reduced || !("IntersectionObserver" in window)) {
+    revealed.forEach(function (el) { el.classList.add("in"); });
+  } else {
+    var counted = false;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add("in");
+          if (!counted && e.target.querySelector && e.target.querySelector("[data-count]")) {
+            counted = true;
+            document.querySelectorAll("[data-count]").forEach(countUp);
+          }
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealed.forEach(function (el) { io.observe(el); });
+  }
+
+  var buttons = document.querySelectorAll(".filters button");
+  var rows = document.querySelectorAll("#record-rows tr");
+  buttons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var f = btn.getAttribute("data-filter");
+      buttons.forEach(function (b) { b.setAttribute("aria-pressed", b === btn ? "true" : "false"); });
+      rows.forEach(function (r) {
+        r.hidden = f !== "all" && r.getAttribute("data-cat") !== f;
+      });
+    });
+  });
+})();
+</script>
 </body>
 </html>
